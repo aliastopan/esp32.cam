@@ -1,5 +1,5 @@
-#ifndef CAM
-#define CAM
+#ifndef ESP32
+#define ESP32
 
 #include <Arduino.h>
 #include <esp_camera.h>
@@ -28,12 +28,12 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
-class Camera
+class Board
 {
     public:
         static void Setup()
         {
-            Serial.begin(9600);
+            Serial.begin(115200);
 	        while (!Serial);
 
             WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
