@@ -11,7 +11,7 @@ const char* password = "esp32cam";
 DNSServer dnsServer;
 
 String serverName = "192.168.3.20";   // REPLACE WITH YOUR SERVER IP ADDRESS
-String serverPath = "/cloud/upload.php";
+String serverPath = "/upload.php";
 const int serverPort = 80;
 WiFiClient client;
 

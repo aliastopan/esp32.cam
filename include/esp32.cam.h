@@ -81,8 +81,6 @@ class Board
                 Serial.printf("camera init failed with error 0x%x", err);
                 ESP.restart();
             }
-
-            SendPhoto();
         }
 
         static void Loop()
@@ -103,6 +101,10 @@ class Board
                 Serial.println("Camera capture failed");
                 delay(1000);
                 ESP.restart();
+            }
+            else
+            {
+                Serial.println("Camera capture success!");
             }
 
             Serial.println("Connecting to server: " + serverName);
@@ -190,8 +192,6 @@ class Board
             }
 
             return getBody;
-
         }
-
 };
 #endif

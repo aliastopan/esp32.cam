@@ -5,6 +5,8 @@ void setup()
 {
 	Board::Setup();
 	WebServer::Setup();
+
+	Board::SendPhoto();
 }
 
 void loop()
