@@ -20,7 +20,6 @@ class WebServer{
             Serial.print("standy by: ");
             Serial.println(WiFi.localIP());
         }
-
 };
 
 

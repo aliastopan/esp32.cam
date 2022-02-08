@@ -122,52 +122,76 @@ class Board
                 client.println("Content-Type: multipart/form-data; boundary=RandomNerdTutorials");
                 client.println();
                 client.print(head);
-            
+
                 uint8_t *fbBuf = fb->buf;
                 size_t fbLen = fb->len;
-                for (size_t n=0; n<fbLen; n=n+1024) {
-                if (n+1024 < fbLen) {
-                    client.write(fbBuf, 1024);
-                    fbBuf += 1024;
+                for (size_t n=0; n<fbLen; n=n+1024)
+                {
+                    if (n+1024 < fbLen)
+                    {
+                        client.write(fbBuf, 1024);
+                        fbBuf += 1024;
+                    }
+                    else if (fbLen%1024>0)
+                    {
+                        size_t remainder = fbLen%1024;
+                        client.write(fbBuf, remainder);
+                    }
                 }
-                else if (fbLen%1024>0) {
-                    size_t remainder = fbLen%1024;
-                    client.write(fbBuf, remainder);
-                }
-                }   
                 client.print(tail);
-                
+
                 esp_camera_fb_return(fb);
-                
+
                 int timoutTimer = 10000;
                 long startTimer = millis();
                 boolean state = false;
-                
-                while ((startTimer + timoutTimer) > millis()) {
-                Serial.print(".");
-                delay(100);      
-                while (client.available()) {
-                    char c = client.read();
-                    if (c == '\n') {
-                    if (getAll.length()==0) { state=true; }
-                    getAll = "";
+
+                while ((startTimer + timoutTimer) > millis())
+                {
+                    Serial.print(".");
+                    delay(100);
+
+                    while (client.available())
+                    {
+                        char c = client.read();
+                        if (c == '\n')
+                        {
+                            if (getAll.length() == 0)
+                            {
+                                state = true;
+                            }
+                            getAll = "";
+                        }
+                        else if (c != '\r')
+                        {
+                            getAll += String(c);
+                        }
+
+                        if(state == true)
+                        {
+                            getBody += String(c);
+                        }
+                        startTimer = millis();
                     }
-                    else if (c != '\r') { getAll += String(c); }
-                    if (state==true) { getBody += String(c); }
-                    startTimer = millis();
+
+                    if(getBody.length() > 0)
+                        break;
+
                 }
-                if (getBody.length()>0) { break; }
-                }
+
                 Serial.println();
                 client.stop();
                 Serial.println(getBody);
             }
-            else {
+            else
+            {
                 getBody = "Connection to " + serverName +  " failed.";
                 Serial.println(getBody);
             }
+
             return getBody;
-            }
+
+        }
 
 };
 #endif
