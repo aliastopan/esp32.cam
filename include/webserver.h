@@ -1,14 +1,7 @@
 #ifndef WEBSERVER
 #define WEBSERVER
 
-#include <DNSServer.h>
-#include "WiFi.h"
-#include <AsyncTCP.h>
-
-const int port = 80;
-const char* ssid = "ESP";
-const char* password = "esp32cam";
-DNSServer dnsServer;
+#include "server.config.h"
 
 class WebServer{
 
