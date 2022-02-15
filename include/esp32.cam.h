@@ -88,7 +88,7 @@ class Board
 
         }
 
-        static String SendPhoto()
+        static String ImageCapture()
         {
             String getAll;
             String getBody;
