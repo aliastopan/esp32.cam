@@ -231,11 +231,11 @@ void setup()
   	config.pixel_format = PIXFORMAT_JPEG;
 
   	if(psramFound()){
-    	config.frame_size = FRAMESIZE_UXGA;
+    	config.frame_size = FRAMESIZE_VGA;
     	config.jpeg_quality = 10;
     	config.fb_count = 2;
   	} else {
-    	config.frame_size = FRAMESIZE_SVGA;
+    	config.frame_size = FRAMESIZE_QVGA;
     	config.jpeg_quality = 12;
     	config.fb_count = 1;
   	}
