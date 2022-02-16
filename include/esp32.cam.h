@@ -63,7 +63,7 @@ class Board
 
             if (psramFound())
             {
-                config.frame_size = FRAMESIZE_UXGA;
+                config.frame_size = FRAMESIZE_VGA;
                 config.jpeg_quality = 10;
                 config.fb_count = 2;
             }
